@@ -1,4 +1,4 @@
-const jwt = require('jwttoken')
+const jwt = require('jsonwebtoken')
 const config = require('config')
 module.exports = (req, res, next) => {
     if(req.method === 'OPTIONS') {
@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, config.get('jwtSecret'))
-        req.user = token
+        req.user = decoded
         next()
 
     } catch {
